@@ -10,6 +10,8 @@ import java.util.Random;
  */
 public class Rand {
 
+	public static final float FIFTY_FIFTY = 0.5f;
+	
 	private static Random r = new Random();
 
 	public static int get(int max) {
