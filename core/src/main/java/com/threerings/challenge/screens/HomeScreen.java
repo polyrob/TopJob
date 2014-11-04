@@ -38,11 +38,13 @@ public class HomeScreen extends AbstractScreen {
 	HomeScreen home = this;
 	Button jobSearch;
 	final Box currentJobBox = new Box();
+	final Box playerSkillsBox = new Box();
 	final Box savingsBox = new Box();
 	final Box expensesBox = new Box();
 	final Box salaryBox = new Box();
 	final Box turnBox = new Box();
 	final Box msgBox = new Box();
+	
 
 	public HomeScreen(ScreenStack stack) {
 		super(stack);
@@ -58,6 +60,8 @@ public class HomeScreen extends AbstractScreen {
 		savingsBox.set(new Label(Formatter.formatMoney(player
 				.getSavings())));
 		turnBox.set(new Label(String.valueOf(turn.getTurn())));
+		playerSkillsBox.set(player.getSkills()
+				.getSkillsDisplayGrp("Skills"));
 	}
 
 	@Override
@@ -108,8 +112,7 @@ public class HomeScreen extends AbstractScreen {
 		});
 
 		Group statsGroup = new Group(AxisLayout.horizontal());
-		statsGroup.add(Skills.getSkillHeadersGroup(), player.getSkills()
-				.getSkillsDisplayGrp("Skills"));
+		statsGroup.add(Skills.getSkillHeadersGroup(), playerSkillsBox);
 
 		@SuppressWarnings("deprecation")
 		Group searchGrp = new Group(AxisLayout.vertical().gap(15),
@@ -152,6 +155,8 @@ public class HomeScreen extends AbstractScreen {
 			expensesBox.destroyContents().set(
 					new Label(Formatter.formatMoney(player
 							.getMonthlyExpenses())));
+			playerSkillsBox.destroyContents().set(player.getSkills()
+				.getSkillsDisplayGrp("Skills"));
 
 			if (td != null) {
 				turnBox.destroyContents().set(

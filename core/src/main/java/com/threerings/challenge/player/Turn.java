@@ -55,7 +55,7 @@ public class Turn {
 				player.getSkills().boostStat(Job.jobSkillCrossRef[jobClass]);
 				int randSkill = Rand.get(Skills.SKILLS.length);
 				player.getSkills().boostStat(randSkill);
-				td.add("You're skills are improving! " + Job.jobSkillCrossRef[jobClass] + " +1. " + Skills.SKILLS[randSkill] + " +1");
+				td.add("You're skills are improving! " + Skills.SKILLS[Job.jobSkillCrossRef[jobClass]] + " +1. " + Skills.SKILLS[randSkill] + " +1");
 			}
 		}
 
