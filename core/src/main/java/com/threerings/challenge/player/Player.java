@@ -14,6 +14,7 @@ public class Player {
 
 	private static final int STARTING_SAVINGS = 5000;
 	private static final int STARTING_EXPENSES = 2224; // based on SF  livingwage.mit.edu
+	private static final int STARTING_SKILLS = 10;
 
 	private Job currentJob;
 	private Skills skills;
@@ -35,7 +36,7 @@ public class Player {
 	private Skills getInitSkills() {
 		Skills s = new Skills();
 		/* Lets get some random skills to get the dude going */
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < STARTING_SKILLS; i++) {
 			s.boostStat(Rand.get(Skills.SKILLS.length));
 		}
 

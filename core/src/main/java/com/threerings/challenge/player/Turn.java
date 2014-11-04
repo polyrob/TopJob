@@ -3,15 +3,17 @@ package com.threerings.challenge.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.threerings.challenge.event.FlatEvent;
+import com.threerings.challenge.event.IEvent;
+import com.threerings.challenge.event.MultiEvent;
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.job.JobGenerator;
 import com.threerings.challenge.stats.Skills;
-import com.threerings.challenge.util.Formatter;
 import com.threerings.challenge.util.Rand;
-
 
 /**
  * Holds turn data and performs next-turn calculations.
+ * 
  * @author Robbie Scheidt
  *
  */
@@ -19,8 +21,12 @@ public class Turn {
 
 	private static final int MAX_NEW_JOBS = 7;
 	private static final int MONTHS_PER_YEAR = 12;
-	private static final int UNEMPLY_MON_SALARY = 800; // guessing, i have no idea
 	private static final int MO_JOB_INCR = 6;
+
+	private static final float GOOD_CHANCE = 0.1f;
+	private static final float BAD_CHANCE = 0.05f;
+	private static final float FIFTY_FIFTY = 0.5f;
+	private static final float TIME_IN_JOB_MULTIPLY = 0.01f;
 
 	private int turn;
 	private Player player;
@@ -41,18 +47,27 @@ public class Turn {
 		jobPostings = getNewJobs();
 
 		player.depositSavings(resolveFinances(td));
-		
+
 		Job job = player.getCurrentJob();
 		if (job != null) {
-			applyRandomEvents(td); // don't apply these if unemployed. Could be insta-kill.
-			
+			applyRandomEvents(td); // don't apply these if unemployed. Could be
+									// insta-kill.
+
 			player.incrementJobTime();
 			if (player.getTimeInJob() % MO_JOB_INCR == 0) {
 				int jobClass = job.getJobClass();
-				player.getSkills().boostStat(Job.jobSkillCrossRef[jobClass]);
+				if (player.getSkills().getSkill(jobClass) < job.getMinSkills().getSkill(jobClass)) {
+					/* player hasn't yet maxed on the jobClass at this place */
+					player.getSkills().boostStat(Job.jobSkillCrossRef[jobClass]);
+					td.add("You've improved your job skill, " + Skills.SKILLS[Job.jobSkillCrossRef[jobClass]]);
+				} else {
+					td.add("This job can teach you no more about " + Skills.SKILLS[Job.jobSkillCrossRef[jobClass]]);
+				}
+				
+				/* always boost a random skill when staying in job */
 				int randSkill = Rand.get(Skills.SKILLS.length);
 				player.getSkills().boostStat(randSkill);
-				td.add("You're skills are improving! " + Skills.SKILLS[Job.jobSkillCrossRef[jobClass]] + " +1. " + Skills.SKILLS[randSkill] + " +1");
+				td.add("Random skill bonus, " + Skills.SKILLS[randSkill] + " +1");
 			}
 		}
 
@@ -83,7 +98,7 @@ public class Turn {
 			td.add("Happy New Year! 3% inflation :(");
 			player.setMonthlyExpenses((int) (player.getMonthlyExpenses() * 1.03));
 		}
-		
+
 		int books = 0;
 		/* debits */
 		books -= player.getMonthlyExpenses();
@@ -93,7 +108,7 @@ public class Turn {
 			books += job.getSalary() / MONTHS_PER_YEAR;
 			books -= getTaxDeduction(job.getSalary() / MONTHS_PER_YEAR);
 		} else {
-			books += UNEMPLY_MON_SALARY;
+			books += Job.UNEMPLY_MON_SALARY;
 		}
 
 		return books;
@@ -111,18 +126,30 @@ public class Turn {
 
 	/* Randomly obtain and apply bad/good events */
 	private void applyRandomEvents(TurnData td) {
-		if (Rand.getSuccessForOdds(player.getTimeInJob()*0.01f)) {
-			Event e = Event.getRandomBadEvent();
-			td.add(e.getDesc() + " Cost is "
-					+ Formatter.formatMoney(e.getAmount()));
-			player.depositSavings(e.getAmount());
+
+		/* BAD_CHANCE - influenced by spending too much time in same job */
+		System.out.println("bad chance: " + (BAD_CHANCE
+				+ (TIME_IN_JOB_MULTIPLY * player.getTimeInJob())));
+		if (Rand.getSuccessForOdds(BAD_CHANCE
+				+ (TIME_IN_JOB_MULTIPLY * player.getTimeInJob()))) {
+			IEvent e;
+			if (Rand.getSuccessForOdds(FIFTY_FIFTY)) {
+				e = new FlatEvent();
+			} else {
+				e = new MultiEvent();
+			}
+			td.add(e.doEvent(false, player));
 		}
 
-		if (Rand.getSuccessForOdds(0.02f)) { // 2% good event, because that's life
-			Event e = Event.getRandomGoodEvent();
-			td.add(e.getDesc() + " Bonus is "
-					+ Formatter.formatMoney(e.getAmount()));
-			player.depositSavings(e.getAmount());
+		/* GOOD_CHANCE */
+		if (Rand.getSuccessForOdds(GOOD_CHANCE)) {
+			IEvent e;
+			if (Rand.getSuccessForOdds(FIFTY_FIFTY)) {
+				e = new FlatEvent();
+			} else {
+				e = new MultiEvent();
+			}
+			td.add(e.doEvent(true, player));
 		}
 
 	}

@@ -27,8 +27,10 @@ import com.threerings.challenge.util.Rand;
  *
  */
 public class InterviewScreen extends AbstractScreen {
-
-	final AbstractScreen interviewScreen = this;
+	
+	protected static final float EXAGGERATE_CHANCE = 0.80f;
+	protected static final float LIE_CHANCE = 0.5f;
+	
 	final HomeScreen home;
 
 	private Interview interview;
@@ -40,8 +42,6 @@ public class InterviewScreen extends AbstractScreen {
 	private Button lieBtn;
 	final Box chanceBox = new Box();
 
-	protected static final float EXAGGERATE_CHANCE = 0.75f;
-	protected static final float LIE_CHANCE = 0.5f;
 
 	public InterviewScreen(ScreenStack stack, HomeScreen home, Job j,
 			Player player, Interview interview) {
@@ -91,7 +91,7 @@ public class InterviewScreen extends AbstractScreen {
 				if (Rand.getSuccessForOdds(EXAGGERATE_CHANCE)) {
 					PlayN.log()
 							.info("Successful Exaggeration. Increasing chance modifier");
-					interview.boostChanceModifier(1.1f);
+					interview.boostChanceModifier(1.2f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
@@ -114,7 +114,7 @@ public class InterviewScreen extends AbstractScreen {
 				if (Rand.getSuccessForOdds(LIE_CHANCE)) {
 					PlayN.log().info(
 							"Successful lie. Increasing chance modifier");
-					interview.boostChanceModifier(1.5f);
+					interview.boostChanceModifier(2.0f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));

@@ -52,7 +52,7 @@ public class HomeScreen extends AbstractScreen {
 		turn = new Turn(player);
 
 		currentJobBox.set(new Label("Unemployed"));
-		salaryBox.set(new Label("$0"));
+		salaryBox.set(new Label("$" + Job.UNEMPLY_MON_SALARY));
 		expensesBox.set(new Label(Formatter.formatMoney(player
 				.getMonthlyExpenses())));
 		savingsBox.set(new Label(Formatter.formatMoney(player
@@ -105,6 +105,7 @@ public class HomeScreen extends AbstractScreen {
 			public void onEmit() {
 				PlayN.log().info("Turn Button Clicked.");
 				TurnData td = turn.nextTurn();
+				jobBtnEnable(true);
 				refreshHome(td);
 			}
 		});
@@ -164,8 +165,8 @@ public class HomeScreen extends AbstractScreen {
 		}
 	}
 
-//	private void disableJobSearch() {
-//		jobSearch.setEnabled(false);
-//	}
+	public void jobBtnEnable(boolean val) {
+		jobSearch.setEnabled(val);	
+	}
 
 }

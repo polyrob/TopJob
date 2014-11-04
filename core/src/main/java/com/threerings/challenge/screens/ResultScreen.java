@@ -71,6 +71,7 @@ public class ResultScreen extends AbstractScreen {
 
 	private void goHome() {
 		home.refreshHome(null); // don't need any TD data.
+		home.jobBtnEnable(false);
 		stack.popTo(home);
 	}
 }

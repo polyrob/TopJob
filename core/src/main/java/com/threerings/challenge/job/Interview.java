@@ -17,8 +17,6 @@ public class Interview {
 	private Player player;
 	
 	private float currentChance;
-
-
 	private float chanceModifier;
 	
 	public Interview(Job job, Player player) {
@@ -48,7 +46,7 @@ public class Interview {
 		
 		currentChance += getMainSkillFactor(js, ps);
 		if (currentChance < 0) currentChance = 0f;
-		if (currentChance > 100) currentChance = 50f;
+		if (currentChance > 1.0f) currentChance = 0.5f;
 	}
 
 	
