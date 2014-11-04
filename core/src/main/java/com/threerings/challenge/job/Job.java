@@ -1,8 +1,5 @@
 package com.threerings.challenge.job;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import com.threerings.challenge.stats.Skills;
 
 public class Job {
@@ -83,7 +80,6 @@ public class Job {
 	}
 
 	public String getJobDisplayName() {
-		//job.setCompany(COMPANIES[Rand.get(COMPANIES.length)]);
 		StringBuilder sb = new StringBuilder();
 		sb.append(JOBLEVEL[jobLevel]).append(" ").append(JOBCLASS[jobClass]).append(" ");
 		if (jobLevel == 5) {

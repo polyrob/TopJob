@@ -5,9 +5,6 @@ import tripleplay.ui.Label;
 import tripleplay.ui.Shim;
 import tripleplay.ui.layout.AxisLayout;
 
-import com.threerings.challenge.job.Job;
-import com.threerings.challenge.util.Rand;
-
 public class Skills {
 
 	public static final int ANALYTICS = 0;
@@ -52,8 +49,6 @@ public class Skills {
 		vGrp.add(new Label(String.valueOf(getSkill(Skills.WEB))));
 
 		return vGrp;
-//		return new Group(AxisLayout.horizontal()).add(hGrp, new Shim(40,
-//				10), vGrp);
 	}
 	
 	public static Group getSkillHeadersGroup() {

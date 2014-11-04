@@ -11,12 +11,11 @@ import com.threerings.challenge.util.Rand;
 
 public class Turn {
 
-	private static final int MONTHLY_DEBIT = 1500; // cheap SF studio
 	private static final int MAX_NEW_JOBS = 7;
 	private static final int MONTHS_PER_YEAR = 12;
-	private static final int UNEMPLY_MON_SALARY = 800; // guessing, i have no
+	private static final int UNEMPLY_MON_SALARY = 800; // guessing, i have no idea
 	private static final int MO_JOB_INCR = 6;
-														// idea
+
 	private int turn;
 	private Player player;
 	private JobGenerator jm;
@@ -39,9 +38,6 @@ public class Turn {
 			td.add("Happy New Year! 3% inflation :(");
 			player.setMonthlyExpenses((int) (player.getMonthlyExpenses() * 1.03));
 		}
-		
-		/* apply skills */
-		
 
 		player.depositSavings(resolveFinances(td));
 		
@@ -107,8 +103,7 @@ public class Turn {
 	}
 
 	private void applyRandomEvents(TurnData td) {
-
-		if (Rand.getSuccessForOdds(0.05f)) { // 5% bad event
+		if (Rand.getSuccessForOdds(player.getTimeInJob()*0.01f)) {
 			Event e = Event.getRandomBadEvent();
 			td.add(e.getDesc() + " Cost is "
 					+ Formatter.formatMoney(e.getAmount()));

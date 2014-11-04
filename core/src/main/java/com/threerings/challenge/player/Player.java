@@ -1,26 +1,17 @@
 package com.threerings.challenge.player;
 
-import java.util.Map;
-
-import com.threerings.challenge.job.Company;
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Rand;
 
 public class Player {
 
-	/*
-	 * "Inventory" items to boost stats. These can be purchased with $ Suits
-	 * Briefcases Shoes Pens Cell Phones? Forged diploma
-	 */
-
 	private static final int STARTING_SAVINGS = 5000;
-	private static final int STARTING_EXPENSES = 2224; // based on SF
-														// livingwage.mit.edu
+	private static final int STARTING_EXPENSES = 2224; // based on SF  livingwage.mit.edu
+
 	private Job currentJob;
 	private Skills skills;
-	// private Map<Item, Integer> inventoryMap;
-	private Map<Company, Float> compAttitudeMap;
+//	private Map<Company, Float> compAttitudeMap;
 	private int savings;
 
 	private int monthlyExpenses;
@@ -58,14 +49,6 @@ public class Player {
 
 	public void setSkills(Skills skills) {
 		this.skills = skills;
-	}
-
-	public Map<Company, Float> getCompAttitudeMap() {
-		return compAttitudeMap;
-	}
-
-	public void setCompAttitudeMap(Map<Company, Float> compAttitudeMap) {
-		this.compAttitudeMap = compAttitudeMap;
 	}
 
 	public int getSavings() {

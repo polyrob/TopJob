@@ -1,24 +1,7 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
 
-import java.util.List;
-
-import playn.core.Font;
-import playn.core.PlayN;
-
-import com.threerings.challenge.job.Job;
-import com.threerings.challenge.stats.Skills;
-import com.threerings.challenge.style.TopJobStyle;
-import com.threerings.challenge.util.Formatter;
-
-import react.UnitSlot;
 import tripleplay.game.ScreenStack;
 import tripleplay.ui.Background;
-import tripleplay.ui.Button;
 import tripleplay.ui.Group;
 import tripleplay.ui.Label;
 import tripleplay.ui.Shim;
@@ -26,14 +9,15 @@ import tripleplay.ui.Style;
 import tripleplay.ui.Styles;
 import tripleplay.ui.layout.AxisLayout;
 
-/**
- * Tests/demonstrates screen-related things.
- */
+import com.threerings.challenge.job.Job;
+import com.threerings.challenge.stats.Skills;
+import com.threerings.challenge.style.TopJobStyle;
+import com.threerings.challenge.util.Formatter;
+
+
 public class JobDetailScreen extends AbstractScreen {
 
 	Job j;
-	
-
 
 	protected static final Styles GREENBG = Styles.make(Style.BACKGROUND
 			.is(Background.solid(0xFF99CC66).inset(5)));
@@ -84,8 +68,6 @@ public class JobDetailScreen extends AbstractScreen {
 		valueGrp.add(new Label(String.valueOf(j.getMinSkills().getSkill(Skills.PROBLEM_SOLVING))));
 		valueGrp.add(new Label(String.valueOf(j.getMinSkills().getSkill(Skills.WEB))));
 		
-
-
 		root.add(new Group(AxisLayout.horizontal()).add(attribGrp, new Shim(50, 10), valueGrp));
 
 		return root;

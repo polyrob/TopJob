@@ -1,14 +1,8 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
 
-import playn.core.Font;
 import static playn.core.PlayN.graphics;
+import playn.core.Font;
 import tripleplay.game.ScreenStack;
-import tripleplay.game.UIAnimScreen;
 import tripleplay.game.UIScreen;
 import tripleplay.ui.Background;
 import tripleplay.ui.Button;
@@ -20,9 +14,7 @@ import tripleplay.ui.Style;
 import tripleplay.ui.Stylesheet;
 import tripleplay.ui.layout.AxisLayout;
 
-/**
- * The base class for all demo screens.
- */
+
 public abstract class AbstractScreen extends UIScreen
 {
     public static final Font SPLASH_FONT = graphics().createFont("Helvetica", Font.Style.PLAIN, 48);

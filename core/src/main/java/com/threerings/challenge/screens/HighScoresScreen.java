@@ -1,25 +1,15 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
+
+import tripleplay.game.ScreenStack;
+import tripleplay.ui.Group;
+import tripleplay.ui.Label;
+import tripleplay.ui.Shim;
+import tripleplay.ui.layout.AxisLayout;
 
 import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
 
-import tripleplay.game.ScreenStack;
-import tripleplay.ui.Background;
-import tripleplay.ui.Group;
-import tripleplay.ui.Label;
-import tripleplay.ui.Shim;
-import tripleplay.ui.Style;
-import tripleplay.ui.Styles;
-import tripleplay.ui.layout.AxisLayout;
 
-/**
- * Tests/demonstrates screen-related things.
- */
 public class HighScoresScreen extends AbstractScreen {
 
 	public HighScoresScreen(ScreenStack stack) {

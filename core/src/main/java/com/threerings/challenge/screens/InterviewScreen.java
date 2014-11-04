@@ -1,8 +1,3 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
 
 import static playn.core.PlayN.assets;
@@ -18,7 +13,6 @@ import tripleplay.ui.Group;
 import tripleplay.ui.Label;
 import tripleplay.ui.Style;
 import tripleplay.ui.Styles;
-import tripleplay.ui.ValueLabel;
 import tripleplay.ui.layout.AxisLayout;
 
 import com.threerings.challenge.job.Interview;
@@ -29,9 +23,7 @@ import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
 import com.threerings.challenge.util.Rand;
 
-/**
- * Tests/demonstrates screen-related things.
- */
+
 public class InterviewScreen extends AbstractScreen {
 
 	final AbstractScreen interviewScreen = this;
@@ -59,7 +51,6 @@ public class InterviewScreen extends AbstractScreen {
 		this.interview = interview;
 		this.j = j;
 		this.p = player;
-		// this.interview = new Interview(j, player);
 		this.home = home;
 
 	}
@@ -94,13 +85,11 @@ public class InterviewScreen extends AbstractScreen {
 				if (Rand.getSuccessForOdds(interview.getCurrentChance())) {
 					PlayN.log().info("Got the JOB!");
 					p.setCurrentJob(j);
-					// stack.remove(interviewScreen);
 					stack.push(new ResultScreen(stack, home, j, true));
 
 				} else {
 					PlayN.log().info("Didn't get the job");
 					stack.push(new ResultScreen(stack, home, j, false));
-					// stack.remove(interviewScreen);
 				}
 
 			}

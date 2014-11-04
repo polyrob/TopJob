@@ -1,8 +1,3 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
 
 import java.util.List;
@@ -21,7 +16,6 @@ import tripleplay.ui.layout.AxisLayout;
 import com.threerings.challenge.job.Interview;
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.player.Player;
-import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Formatter;
 
 /**
@@ -98,12 +92,6 @@ public class JobScreen extends AbstractScreen {
 						stack.push(interviewScreen);
 
 						interviewScreen.back.setEnabled(false);
-//						interviewScreen.back.clicked().connect(new UnitSlot() {
-//							public void onEmit() {
-//								jobApplyBtn.setEnabled(false);
-//								stack.remove(interviewScreen);
-//							}
-//						});
 					}
 				});
 			} else {
@@ -121,24 +109,5 @@ public class JobScreen extends AbstractScreen {
 		return root;
 	}
 
-	/*
-	 * If the player has non-zero chance they are eligible
-	 */
-	// private boolean eligibleForJob(Job j, Player player) {
-	// int jobClass = j.getJobClass();
-	//
-	// /*
-	// * if the player has almost the req main class skill then they are
-	// * eligible
-	// */
-	// if (player.getSkills().getSkill(Job.jobSkillCrossRef[jobClass]) < j
-	// .getMinSkills().getSkill(Job.jobSkillCrossRef[jobClass]) - 1) {
-	//
-	// return false;
-	// } else {
-	// System.out.println("Meets minimum. " + Skills.SKILLS[jobClass]);
-	// return true;
-	// }
-	// }
 
 }

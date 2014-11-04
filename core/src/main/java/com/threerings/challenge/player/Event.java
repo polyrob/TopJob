@@ -19,13 +19,13 @@ public class Event {
 
 	public static Event getRandomBadEvent() {
 		String desc = BAD_THINGS[Rand.get(BAD_THINGS.length)];
-		int cost = -1 * Rand.get(10)*500; 
+		int cost = -1 * Rand.get(20)*500; 
 		return new Event(desc, cost);
 	}
 	
 	public static Event getRandomGoodEvent() {
 		String desc = GOOD_THINGS[Rand.get(GOOD_THINGS.length)];
-		int cost = Rand.get(5)*500; 
+		int cost = Rand.get(10)*500; 
 		return new Event(desc, cost);
 	}
 

@@ -1,8 +1,3 @@
-//
-// Triple Play - utilities for use in PlayN-based games
-// Copyright (c) 2011-2014, Three Rings Design, Inc. - All rights reserved.
-// http://github.com/threerings/tripleplay/blob/master/LICENSE
-
 package com.threerings.challenge.screens;
 
 import static playn.core.PlayN.log;
@@ -16,9 +11,6 @@ import tripleplay.ui.Style;
 import tripleplay.ui.Stylesheet;
 import tripleplay.ui.layout.AxisLayout;
 
-/**
- * A screen that contains UI elements.
- */
 public abstract class TestScreen extends UIScreen
 {
     public TestScreen (int depth) {
