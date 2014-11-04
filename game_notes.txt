@@ -1,0 +1,30 @@
+Go from a broke pizza delivery boy to Banana Computers CEO. Thinking about a "Papers Please" kind of game.
+
+Turn-based.
+
+"Inventory" items to boost stats. These can be purchased with $
+	Suits
+	Briefcases
+	Shoes
+	Pens
+	Cell Phones?
+	Forged diploma
+	
+	
+Skills that determine if you will get a job.
+	developer skills
+		Core language
+		Web
+		Games
+		Harware/API
+		Mobile
+		Enterprise
+	
+	Soft-skills
+		Communication
+		Busywork
+		Bullshitting
+	
+Experience: meet mininums for job applications.  Also each time you get a job it will boost your ratings in those disciplines
+
+To help in interviews, you can try bullshitting, bribing, threatening, etc. 
