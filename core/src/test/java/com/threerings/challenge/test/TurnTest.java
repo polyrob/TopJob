@@ -4,15 +4,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.threerings.challenge.player.Player;
-import com.threerings.challenge.player.Turn;
+import com.threerings.challenge.player.TurnManager;
 
 public class TurnTest {
 
-	private Turn turn;
+	private TurnManager turn;
 	
 	@Before
 	public void init() {
-		 turn = new Turn(new Player());
+		 turn = new TurnManager(new Player());
 	}
 	
 	@Test

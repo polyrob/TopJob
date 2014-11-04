@@ -22,11 +22,11 @@ public class MultiEvent implements IEvent {
 		
 		if (good) {
 			sb.append(GOOD_THINGS[Rand.get(GOOD_THINGS.length)]);
-			sb.append(" -").append(Formatter.getPercentageFloat(value));
+			sb.append("Expenses -").append(Formatter.getPercentageFloat(value));
 			player.setMonthlyExpenses((int) (currMoExpense - currMoExpense*value));
 		} else {
 			sb.append(BAD_THINGS[Rand.get(BAD_THINGS.length)]);
-			sb.append(" +").append(Formatter.getPercentageFloat(value));
+			sb.append("Expenses +").append(Formatter.getPercentageFloat(value));
 			player.setMonthlyExpenses((int) (currMoExpense + currMoExpense*value));
 		}
 		return sb.toString();

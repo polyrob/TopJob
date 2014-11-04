@@ -7,7 +7,7 @@ import tripleplay.ui.Group;
 import tripleplay.ui.Label;
 import tripleplay.ui.layout.AxisLayout;
 
-import com.threerings.challenge.player.Turn;
+import com.threerings.challenge.player.TurnManager;
 
 /**
  * Game over screen. Display message and back button to start over.
@@ -19,7 +19,7 @@ public class LoseScreen extends AbstractScreen {
 	private Label resultLabel;
 	private Image bgImage;
 
-	public LoseScreen(ScreenStack stack, Turn turn) {
+	public LoseScreen(ScreenStack stack, TurnManager turn) {
 		super(stack);
 		resultLabel = new Label("You're out of money, you bum! Game over.");
 		bgImage = assets().getImage("images/game_over.jpg");

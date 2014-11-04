@@ -78,6 +78,10 @@ public class Player {
 
 	public void setMonthlyExpenses(int monthlyExpenses) {
 		this.monthlyExpenses = monthlyExpenses;
+		if (monthlyExpenses < 0) {
+			/* if somehow this occurs by some miracle */
+			monthlyExpenses = 0;
+		}
 	}
 
 	public void incrementJobTime() {

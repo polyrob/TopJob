@@ -14,7 +14,7 @@ import tripleplay.ui.layout.AxisLayout;
 
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.player.Player;
-import com.threerings.challenge.player.Turn;
+import com.threerings.challenge.player.TurnManager;
 import com.threerings.challenge.player.TurnData;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.style.TopJobStyle;
@@ -30,7 +30,7 @@ import com.threerings.challenge.util.Formatter;
 public class HomeScreen extends AbstractScreen {
 
 	private Player player;
-	private Turn turn;
+	private TurnManager turn;
 
 	/* UI Components */
 	private HomeScreen home = this;
@@ -49,7 +49,7 @@ public class HomeScreen extends AbstractScreen {
 
 		/* init game objects */
 		player = new Player();
-		turn = new Turn(player);
+		turn = new TurnManager(player);
 
 		currentJobBox.set(new Label("Unemployed"));
 		salaryBox.set(new Label("$" + Job.UNEMPLY_MON_SALARY));

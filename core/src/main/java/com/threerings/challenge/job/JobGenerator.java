@@ -12,7 +12,7 @@ import com.threerings.challenge.util.Rand;
  */
 public class JobGenerator {
 
-	private static final int MIN_BASE_SALARY = 30_000;
+	private static final int MIN_BASE_SALARY = 20_000;
 
 	public Job getJob() {
 		Job job = new Job();
@@ -45,9 +45,9 @@ public class JobGenerator {
 
 	private int getSalaryForJob(Job j) {
 		int s = MIN_BASE_SALARY;
-		s += j.getCompany()*6000;
-		s += j.getJobLevel()*16000;
-		s += j.getJobClass()*5000;
+		s += j.getCompany()*3000;
+		s += j.getJobLevel()*24000;
+		s += j.getJobClass()*2000;
 		return s;
 	}
 
