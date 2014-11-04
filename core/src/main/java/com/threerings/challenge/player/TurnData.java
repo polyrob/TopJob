@@ -7,6 +7,13 @@ import tripleplay.ui.Group;
 import tripleplay.ui.Label;
 import tripleplay.ui.layout.AxisLayout;
 
+
+/**
+ * Return object from next turn processing.
+ * Delivers information back to HomeScreen 
+ * @author Robbie Scheidt
+ *
+ */
 public class TurnData {
 	
 	private List<String> ntfcn;

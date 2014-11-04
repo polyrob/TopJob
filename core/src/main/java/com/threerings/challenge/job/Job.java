@@ -2,15 +2,22 @@ package com.threerings.challenge.job;
 
 import com.threerings.challenge.stats.Skills;
 
+
+/**
+ * Job class represents a job object.
+ * Also includes constants to assist with procedural generation and cross reference
+ * @author Robbie Scheidt
+ *
+ */
 public class Job {
 
-	public static String[] COMPANIES = {"BSOD Inc.", "SpiWare", "BigBug Software", "LackLuster Technologies", "Bethesdo", "Wahoo", "IPM", "Banana Computers", "Macrosoft", "Goodle"};
-	public static String[] JOBLEVEL = {"Intern", "Entry Level", "Intermediate", "Senior", "Lead", "Director of"};
-	public static String[] JOBCLASS = {"Software", "Game", "Web", "Mobile", "Front End", "API", "Enterprise"};
-	public static String[] JOBSUFFIX = {"Engineer", "Developer", "Analyst", "Programmer" , "Architect"};
-	public static String[] DIRECTORSUFFIX = {"Engineering", "Development", "Analysis", "Programming", "Architecture"};
+	public static final String[] COMPANIES = {"BSOD Inc.", "SpiWare", "BigBug Software", "LackLuster Technologies", "Bethesdo", "Wahoo", "IPM", "Banana Computers", "Macrosoft", "Goodle"};
+	public static final String[] JOBLEVEL = {"Intern", "Entry Level", "Intermediate", "Senior", "Lead", "Director of"};
+	public static final String[] JOBCLASS = {"Software", "Game", "Web", "Mobile", "Front End", "API", "Enterprise"};
+	public static final String[] JOBSUFFIX = {"Engineer", "Developer", "Analyst", "Programmer" , "Architect"};
+	public static final String[] DIRECTORSUFFIX = {"Engineering", "Development", "Analysis", "Programming", "Architecture"};
 	
-	public static int[] jobSkillCrossRef = {2, 5, 9, 7, 4, 6, 3};
+	public static final int[] jobSkillCrossRef = {2, 5, 9, 7, 4, 6, 3};
 
 	private int company;
 	private int jobClass;
@@ -91,6 +98,4 @@ public class Job {
 		return sb.toString();
 	}
 
-	
-	
 }

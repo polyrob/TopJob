@@ -4,6 +4,12 @@ import com.threerings.challenge.player.Player;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Rand;
 
+
+/**
+ * Class to handle Interview data and chance calculations.
+ * @author Robbie Scheidt
+ *
+ */
 public class Interview {
 
 	private static final float BASE_CHANCE = 0.3f;
@@ -28,6 +34,7 @@ public class Interview {
 		System.out.println("Chance for " + job.getJobDisplayName() + ": " + currentChance);
 	}
 	
+	
 	private void caclulateChance() {
 		currentChance = BASE_CHANCE;
 		Skills js = job.getMinSkills();
@@ -44,6 +51,7 @@ public class Interview {
 		if (currentChance > 100) currentChance = 50f;
 	}
 
+	
 	private float getMainSkillFactor(Skills js, Skills ps) {
 		int jobClass = job.getJobClass();
 		int pMainSkill = ps.getSkill(Job.jobSkillCrossRef[jobClass]);

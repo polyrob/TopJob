@@ -3,6 +3,12 @@ package com.threerings.challenge.util;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+
+/**
+ * Utility class to assist with display.
+ * @author Robbie Scheidt
+ *
+ */
 public class Formatter {
 	private static NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);;
 	

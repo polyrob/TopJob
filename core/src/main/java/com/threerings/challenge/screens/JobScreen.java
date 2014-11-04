@@ -19,16 +19,23 @@ import com.threerings.challenge.player.Player;
 import com.threerings.challenge.util.Formatter;
 
 /**
- * Tests/demonstrates screen-related things.
+ * Display today's job listings.
+ * 
+ * @author Robbie Scheidt
+ *
  */
 public class JobScreen extends AbstractScreen {
 
-	HomeScreen home;
+	/*
+	 * Need to pass a reference to home so it's available at the end of the
+	 * stack. Doesn't seem to work letting me popTo or go to top.
+	 */
+	private HomeScreen home;
 
-	List<Job> jobs;
-	Player player;
+	private List<Job> jobs;
+	private Player player;
 
-	Button jobApplyBtn;
+	private Button jobApplyBtn;
 
 	protected static final Styles GREENBG = Styles.make(Style.BACKGROUND
 			.is(Background.solid(0xFF99CC66).inset(5)));
@@ -39,16 +46,6 @@ public class JobScreen extends AbstractScreen {
 		this.home = home;
 		this.jobs = list;
 		this.player = player;
-	}
-
-	@Override
-	protected String name() {
-		return "Jobs";
-	}
-
-	@Override
-	protected String title() {
-		return "Today's Jobs";
 	}
 
 	@Override
@@ -79,7 +76,7 @@ public class JobScreen extends AbstractScreen {
 			});
 
 			final Interview interview = new Interview(j, player);
-			
+
 			if (interview.getCurrentChance() > 0f) {
 				jobApplyBtn = new Button("Apply").onClick(new UnitSlot() {
 					@Override
@@ -109,5 +106,13 @@ public class JobScreen extends AbstractScreen {
 		return root;
 	}
 
+	@Override
+	protected String name() {
+		return "Jobs";
+	}
 
+	@Override
+	protected String title() {
+		return "Today's Jobs";
+	}
 }

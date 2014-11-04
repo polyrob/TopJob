@@ -7,6 +7,13 @@ import tripleplay.game.ScreenStack;
 
 import com.threerings.challenge.screens.MenuScreen;
 
+
+/**
+ * Starting Game class.
+ * Builds ScreenStack and gives it to the MenuScreen.
+ * @author Robbie Scheidt
+ *
+ */
 public class Topjob extends Game.Default {
 	
 	public static final int UPDATE_RATE = 30;
@@ -16,7 +23,6 @@ public class Topjob extends Game.Default {
 	}
 	
     protected final Clock.Source _clock = new Clock.Source(UPDATE_RATE);
-    
     
     @Override public void init () {
     	 stack.push(new MenuScreen(stack));

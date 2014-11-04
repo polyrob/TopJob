@@ -5,6 +5,13 @@ import tripleplay.ui.Label;
 import tripleplay.ui.Shim;
 import tripleplay.ui.layout.AxisLayout;
 
+/**
+ * Represent a collection of skills. Also contains UI class to assist with
+ * common Skills display Group.
+ * 
+ * @author Robbie Scheidt
+ *
+ */
 public class Skills {
 
 	public static final int ANALYTICS = 0;
@@ -23,7 +30,7 @@ public class Skills {
 			"Game Development", "Hardware and API", "Mobile Development",
 			"Problem Solving", "Web Development" };
 
-
+	/* simplier to use array for values and cross reference the Strings */ 
 	private int[] skills = new int[10];
 
 	public int getSkill(int i) {
@@ -34,36 +41,42 @@ public class Skills {
 		skills[skill]++;
 	}
 
-	public Group getSkillsDisplayGrp(String header) {		
+	public Group getSkillsDisplayGrp(String header) {
 		Group vGrp = new Group(AxisLayout.vertical());
 		vGrp.add(new Label(header));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.ANALYTICS))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.COMMUNICATION))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.CORE))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.ENTERPRISE))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.FRONTEND))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.GAME))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.HARDWARE))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.MOBILE))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.PROBLEM_SOLVING))));
-		vGrp.add(new Label(String.valueOf(getSkill(Skills.WEB))));
+		for (int i=0; i<skills.length; i++) {
+			vGrp.add(new Label(String.valueOf(skills[i])));
+		}
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.ANALYTICS))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.COMMUNICATION))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.CORE))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.ENTERPRISE))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.FRONTEND))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.GAME))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.HARDWARE))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.MOBILE))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.PROBLEM_SOLVING))));
+//		vGrp.add(new Label(String.valueOf(getSkill(Skills.WEB))));
 
 		return vGrp;
 	}
-	
+
 	public static Group getSkillHeadersGroup() {
 		Group hGrp = new Group(AxisLayout.vertical());
 		hGrp.add(new Shim(10, 10));
-		hGrp.add(new Label("Analytics"));
-		hGrp.add(new Label("Communication"));
-		hGrp.add(new Label("Core Language"));
-		hGrp.add(new Label("Enterprise"));
-		hGrp.add(new Label("Front End"));
-		hGrp.add(new Label("Games"));
-		hGrp.add(new Label("Hardware/API"));
-		hGrp.add(new Label("Mobile"));
-		hGrp.add(new Label("Problem Solving"));
-		hGrp.add(new Label("Web"));
+		for (int i=0; i<SKILLS.length; i++) {
+			hGrp.add(new Label(SKILLS[i]));
+		}
+//		hGrp.add(new Label("Analytics"));
+//		hGrp.add(new Label("Communication"));
+//		hGrp.add(new Label("Core Language"));
+//		hGrp.add(new Label("Enterprise"));
+//		hGrp.add(new Label("Front End"));
+//		hGrp.add(new Label("Games"));
+//		hGrp.add(new Label("Hardware/API"));
+//		hGrp.add(new Label("Mobile"));
+//		hGrp.add(new Label("Problem Solving"));
+//		hGrp.add(new Label("Web"));
 		return hGrp;
 	}
 

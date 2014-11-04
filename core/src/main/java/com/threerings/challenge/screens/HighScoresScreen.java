@@ -10,6 +10,12 @@ import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
 
 
+/**
+ * Display highest scores to user.
+ * This will probably be left as a mock screen.
+ * @author Robbie Scheidt
+ *
+ */
 public class HighScoresScreen extends AbstractScreen {
 
 	public HighScoresScreen(ScreenStack stack) {
@@ -26,10 +32,11 @@ public class HighScoresScreen extends AbstractScreen {
 		return "High Scores";
 	}
 
+	
 	@Override
 	protected Group createIface() {
 
-		/* Get highscores and build Group layout */
+		/* Get highs cores and build Group layout */
 		Group namesGrp = new Group(AxisLayout.vertical());
 		for (int i = 1; i <= 8; i++) {
 			namesGrp.add(new Label("Player " + i));

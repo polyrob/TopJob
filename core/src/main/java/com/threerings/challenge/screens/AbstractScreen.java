@@ -15,18 +15,22 @@ import tripleplay.ui.Stylesheet;
 import tripleplay.ui.layout.AxisLayout;
 
 
+/**
+ * The main screen that all others will inherit
+ * @author Robbie Scheidt
+ *
+ */
 public abstract class AbstractScreen extends UIScreen
 {
     public static final Font SPLASH_FONT = graphics().createFont("Helvetica", Font.Style.PLAIN, 48);
     public static final Font TITLE_FONT = graphics().createFont("Helvetica", Font.Style.PLAIN, 32);
     
     protected final ScreenStack stack;
-    protected Root root;
-    public Button back;
+    protected Root root; 	// root to which all UI groups will be added
+    public Button back; 	// public so it's emit() can be overridden where needed
     
     public AbstractScreen(ScreenStack stack) {
 		this.stack = stack;
-		System.out.println(this.name() + " Constructor...");
 	}
 
     @Override public void wasAdded () {

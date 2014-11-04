@@ -20,9 +20,12 @@ import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
 
-
 /**
- * Tests/demonstrates screen-related things.
+ * Home Screen is where user starts their day.
+ * This screen is responsible for displaying current data to user
+ * and buttons navigating to jobs, inventory, etc.
+ * @author Robbie Scheidt
+ *
  */
 public class HomeScreen extends AbstractScreen {
 
@@ -30,8 +33,8 @@ public class HomeScreen extends AbstractScreen {
 	private Turn turn;
 
 	/* UI Components */
-	HomeScreen home = this;
-	Button jobSearch;
+	private HomeScreen home = this;
+	private Button jobSearch;
 	final Box currentJobBox = new Box();
 	final Box playerSkillsBox = new Box();
 	final Box savingsBox = new Box();
@@ -161,8 +164,8 @@ public class HomeScreen extends AbstractScreen {
 		}
 	}
 
-	public void disableJobSearch() {
-		jobSearch.setEnabled(false);
-	}
+//	private void disableJobSearch() {
+//		jobSearch.setEnabled(false);
+//	}
 
 }

@@ -3,6 +3,13 @@ package com.threerings.challenge.job;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Rand;
 
+
+/**
+ * Generate jobs procedurally.
+ * This will be generated each turn.
+ * @author Robbie Scheidt
+ *
+ */
 public class JobGenerator {
 
 	private static final int MIN_BASE_SALARY = 30_000;

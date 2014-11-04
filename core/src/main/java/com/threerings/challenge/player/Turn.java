@@ -9,6 +9,12 @@ import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Formatter;
 import com.threerings.challenge.util.Rand;
 
+
+/**
+ * Holds turn data and performs next-turn calculations.
+ * @author Robbie Scheidt
+ *
+ */
 public class Turn {
 
 	private static final int MAX_NEW_JOBS = 7;
@@ -28,16 +34,11 @@ public class Turn {
 		jobPostings = getNewJobs();
 	}
 
+	/* Perform next turn calculations for finances, events, etc */
 	public TurnData nextTurn() {
 		TurnData td = new TurnData(turn++);
 
 		jobPostings = getNewJobs();
-
-		/* check one year */
-		if (turn % 12 == 0) {
-			td.add("Happy New Year! 3% inflation :(");
-			player.setMonthlyExpenses((int) (player.getMonthlyExpenses() * 1.03));
-		}
 
 		player.depositSavings(resolveFinances(td));
 		
@@ -75,11 +76,17 @@ public class Turn {
 		return jobPostings;
 	}
 
+	/* handle main finance calculations */
 	private int resolveFinances(TurnData td) {
+		/* check one year */
+		if (turn % 12 == 0) {
+			td.add("Happy New Year! 3% inflation :(");
+			player.setMonthlyExpenses((int) (player.getMonthlyExpenses() * 1.03));
+		}
+		
 		int books = 0;
 		/* debits */
 		books -= player.getMonthlyExpenses();
-
 		/* credits */
 		Job job = player.getCurrentJob();
 		if (job != null) {
@@ -102,6 +109,7 @@ public class Turn {
 		}
 	}
 
+	/* Randomly obtain and apply bad/good events */
 	private void applyRandomEvents(TurnData td) {
 		if (Rand.getSuccessForOdds(player.getTimeInJob()*0.01f)) {
 			Event e = Event.getRandomBadEvent();

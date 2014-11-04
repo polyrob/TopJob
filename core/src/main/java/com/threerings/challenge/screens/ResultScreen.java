@@ -12,13 +12,19 @@ import tripleplay.ui.layout.AxisLayout;
 import com.threerings.challenge.job.Job;
 
 
+/**
+ * Suprise user with results from interview.
+ * @author Robbie Scheidt
+ *
+ */
 public class ResultScreen extends AbstractScreen {
 
-	HomeScreen home;
-	Job job;
+	private HomeScreen home;
+	private Job job;
 
-	Label resultLabel;
-	Image bgImage;
+	/* UI */
+	private Label resultLabel;
+	private Image bgImage;
 
 	public ResultScreen(ScreenStack stack, HomeScreen home, Job job,
 			boolean offer) {
@@ -26,6 +32,7 @@ public class ResultScreen extends AbstractScreen {
 		this.job = job;
 		this.home = home;
 
+		/* if the offer was true, they got the job */
 		if (offer) {
 			resultLabel = new Label("Congratulations! Welcome to "
 					+ Job.COMPANIES[job.getCompany()] + "!");
@@ -63,9 +70,7 @@ public class ResultScreen extends AbstractScreen {
 	}
 
 	private void goHome() {
-		home.refreshHome(null);
+		home.refreshHome(null); // don't need any TD data.
 		stack.popTo(home);
-		
 	}
-
 }

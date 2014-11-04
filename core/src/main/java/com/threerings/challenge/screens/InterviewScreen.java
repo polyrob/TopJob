@@ -3,16 +3,12 @@ package com.threerings.challenge.screens;
 import static playn.core.PlayN.assets;
 import playn.core.Image;
 import playn.core.PlayN;
-import react.Function;
 import react.UnitSlot;
 import tripleplay.game.ScreenStack;
-import tripleplay.ui.Background;
 import tripleplay.ui.Box;
 import tripleplay.ui.Button;
 import tripleplay.ui.Group;
 import tripleplay.ui.Label;
-import tripleplay.ui.Style;
-import tripleplay.ui.Styles;
 import tripleplay.ui.layout.AxisLayout;
 
 import com.threerings.challenge.job.Interview;
@@ -24,24 +20,26 @@ import com.threerings.challenge.util.Formatter;
 import com.threerings.challenge.util.Rand;
 
 
+/**
+ * Where user weights chances at getting a job and can make
+ * choices to influence their odds.
+ * @author Robbie Scheidt
+ *
+ */
 public class InterviewScreen extends AbstractScreen {
 
 	final AbstractScreen interviewScreen = this;
 	final HomeScreen home;
 
-	Interview interview;
-	Button exaggerateBtn;
-	Job j;
-	Player p;
+	private Interview interview;
+	private Job j;
+	private Player p;
 
 	/* UI Components */
-	Button lieBtn;
-	react.Value<Float> chance;
-
+	private Button exaggerateBtn;
+	private Button lieBtn;
 	final Box chanceBox = new Box();
 
-	protected static final Styles GREENBG = Styles.make(Style.BACKGROUND
-			.is(Background.solid(0xFF99CC66).inset(5)));
 	protected static final float EXAGGERATE_CHANCE = 0.75f;
 	protected static final float LIE_CHANCE = 0.5f;
 
@@ -53,16 +51,6 @@ public class InterviewScreen extends AbstractScreen {
 		this.p = player;
 		this.home = home;
 
-	}
-
-	@Override
-	protected String name() {
-		return "Interview";
-	}
-
-	@Override
-	protected String title() {
-		return "Interview";
 	}
 
 	@Override
@@ -79,6 +67,7 @@ public class InterviewScreen extends AbstractScreen {
 				.getSkillsDisplayGrp("You"),
 				new Label(getItvwrImage(j.getCompany()))), chanceGrp);
 
+		/* Complete your interview with current odds */
 		Button commitBtn = new Button("Commit").onClick(new UnitSlot() {
 			@Override
 			public void onEmit() {
@@ -95,6 +84,7 @@ public class InterviewScreen extends AbstractScreen {
 			}
 		});
 
+		/* Slightly increase odds with a high probability */
 		exaggerateBtn = new Button("Exaggerate").onClick(new UnitSlot() {
 			@Override
 			public void onEmit() {
@@ -107,7 +97,7 @@ public class InterviewScreen extends AbstractScreen {
 									.getCurrentChance())));
 				} else {
 					PlayN.log().info("FAILED to exaggerate.");
-					interview.boostChanceModifier(0.5f);
+					interview.boostChanceModifier(0.5f); // cut in half if unsucessful
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
@@ -117,19 +107,20 @@ public class InterviewScreen extends AbstractScreen {
 			}
 		});
 
+		/* Significantly improve odds with low probability */
 		lieBtn = new Button("Lie").onClick(new UnitSlot() {
 			@Override
 			public void onEmit() {
 				if (Rand.getSuccessForOdds(LIE_CHANCE)) {
 					PlayN.log().info(
 							"Successful lie. Increasing chance modifier");
-					interview.boostChanceModifier(1.3f);
+					interview.boostChanceModifier(1.5f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
 				} else {
 					PlayN.log().info("FAILED lie. Doomed.");
-					interview.boostChanceModifier(0.1f);
+					interview.boostChanceModifier(0.2f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
@@ -138,7 +129,7 @@ public class InterviewScreen extends AbstractScreen {
 			}
 		});
 
-		Group optionsGrp = new Group(AxisLayout.horizontal().gap(10), GREENBG)
+		Group optionsGrp = new Group(AxisLayout.horizontal().gap(10), TopJobStyle.GREENBG)
 				.add(commitBtn, exaggerateBtn, lieBtn);
 
 		Group root = new Group(AxisLayout.vertical())
@@ -149,6 +140,7 @@ public class InterviewScreen extends AbstractScreen {
 		return root;
 	}
 
+	/* Get image for the interviewer based on their company */
 	private Image getItvwrImage(int company) {
 		String prefix = "images/interviewer/";
 		String suffix = ".jpg";
@@ -157,10 +149,14 @@ public class InterviewScreen extends AbstractScreen {
 		return interviewerImage;
 	}
 
-	protected Function<Float, String> FORMATTER = new Function<Float, String>() {
-		public String apply(Float value) {
-			return String.valueOf(value.intValue());
-		}
-	};
 
+	@Override
+	protected String name() {
+		return "Interview";
+	}
+
+	@Override
+	protected String title() {
+		return "Interview";
+	}
 }

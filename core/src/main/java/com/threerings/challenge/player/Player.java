@@ -4,6 +4,12 @@ import com.threerings.challenge.job.Job;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.util.Rand;
 
+
+/**
+ * Represents the player and their current properties.
+ * @author Robbie Scheidt
+ *
+ */
 public class Player {
 
 	private static final int STARTING_SAVINGS = 5000;
@@ -11,7 +17,9 @@ public class Player {
 
 	private Job currentJob;
 	private Skills skills;
-//	private Map<Company, Float> compAttitudeMap;
+	// TODO: include inventory that can be purchaced with money?
+	// TODO: include map to keep track of company attitude? So if you lie or leave a
+	// company it will be harder to interview with them again?
 	private int savings;
 
 	private int monthlyExpenses;
