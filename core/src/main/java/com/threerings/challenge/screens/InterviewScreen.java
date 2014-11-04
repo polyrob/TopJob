@@ -14,6 +14,7 @@ import tripleplay.ui.layout.AxisLayout;
 import com.threerings.challenge.job.Interview;
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.player.Player;
+import com.threerings.challenge.sound.SoundManager;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
@@ -53,6 +54,15 @@ public class InterviewScreen extends AbstractScreen {
 
 	}
 
+
+	@Override
+	public void wasShown() {
+		super.wasShown();
+		SoundManager.KNOCK.play();
+	}
+
+
+
 	@Override
 	protected Group createIface() {
 		chanceBox.set(new Label(Formatter.getPercentageFloat(interview
@@ -89,14 +99,13 @@ public class InterviewScreen extends AbstractScreen {
 			@Override
 			public void onEmit() {
 				if (Rand.getSuccessForOdds(EXAGGERATE_CHANCE)) {
-					PlayN.log()
-							.info("Successful Exaggeration. Increasing chance modifier");
+					SoundManager.BIG_TIME.play();
 					interview.boostChanceModifier(1.2f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
 				} else {
-					PlayN.log().info("FAILED to exaggerate.");
+					SoundManager.WELL_YEA.play();
 					interview.boostChanceModifier(0.5f); // cut in half if unsucessful
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
@@ -112,14 +121,13 @@ public class InterviewScreen extends AbstractScreen {
 			@Override
 			public void onEmit() {
 				if (Rand.getSuccessForOdds(LIE_CHANCE)) {
-					PlayN.log().info(
-							"Successful lie. Increasing chance modifier");
+					SoundManager.ABSOLUTELY.play();
 					interview.boostChanceModifier(2.0f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview
 									.getCurrentChance())));
 				} else {
-					PlayN.log().info("FAILED lie. Doomed.");
+					SoundManager.WELL_UH.play();
 					interview.boostChanceModifier(0.2f);
 					chanceBox.destroyContents().set(
 							new Label(Formatter.getPercentageFloat(interview

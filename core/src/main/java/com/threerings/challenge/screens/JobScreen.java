@@ -1,8 +1,11 @@
 package com.threerings.challenge.screens;
 
+import static playn.core.PlayN.assets;
+
 import java.util.List;
 
 import playn.core.PlayN;
+import playn.core.Sound;
 import react.UnitSlot;
 import tripleplay.game.ScreenStack;
 import tripleplay.ui.Background;
@@ -16,6 +19,7 @@ import tripleplay.ui.layout.AxisLayout;
 import com.threerings.challenge.job.Interview;
 import com.threerings.challenge.job.Job;
 import com.threerings.challenge.player.Player;
+import com.threerings.challenge.sound.SoundManager;
 import com.threerings.challenge.util.Formatter;
 
 /**
@@ -48,6 +52,16 @@ public class JobScreen extends AbstractScreen {
 		this.player = player;
 	}
 
+
+
+	@Override
+	public void wasShown() {
+		super.wasShown();
+		SoundManager.PAPER.play();
+	}
+
+
+
 	@Override
 	protected Group createIface() {
 		Group root = new Group(AxisLayout.vertical());
@@ -63,7 +77,7 @@ public class JobScreen extends AbstractScreen {
 			Button jobInfoBtn = new Button("Info").onClick(new UnitSlot() {
 				@Override
 				public void onEmit() {
-					PlayN.log().info("Job Info Button Clicked.");
+					SoundManager.CLICK.play();
 					final AbstractScreen detailScreen = new JobDetailScreen(
 							stack, j);
 					stack.push(detailScreen);
@@ -81,8 +95,7 @@ public class JobScreen extends AbstractScreen {
 				jobApplyBtn = new Button("Apply").onClick(new UnitSlot() {
 					@Override
 					public void onEmit() {
-						PlayN.log().info("Job Apply Button Clicked.");
-
+						SoundManager.CLICK.play();
 						jobs.remove(j);
 						final AbstractScreen interviewScreen = new InterviewScreen(
 								stack, home, j, player, interview);

@@ -1,9 +1,12 @@
 package com.threerings.challenge.screens;
 
 import static playn.core.PlayN.assets;
+import playn.core.AbstractSound;
 import playn.core.Image;
+import playn.core.Sound;
 import react.UnitSlot;
 import tripleplay.game.ScreenStack;
+import tripleplay.sound.Clip;
 import tripleplay.ui.Background;
 import tripleplay.ui.Button;
 import tripleplay.ui.Group;
@@ -12,6 +15,7 @@ import tripleplay.ui.SimpleStyles;
 import tripleplay.ui.Style;
 import tripleplay.ui.layout.AxisLayout;
 
+import com.threerings.challenge.sound.SoundManager;
 import com.threerings.challenge.style.TopJobStyle;
 
 /**
@@ -24,12 +28,15 @@ public class MenuScreen extends AbstractScreen {
 
 	public MenuScreen(ScreenStack stack) {
 		super(stack);
-		System.out.println("MenuScreen Constructor()");
 	}
 
 	/* Override this since we don't want back buttons. Just easier than new UIScreen */
 	@Override
 	public void wasShown() {
+		
+		Sound soundtrack = assets().getSound("sound/well_uh");
+		soundtrack.play();
+		
 		root = iface.createRoot(AxisLayout.vertical().gap(15),
 				SimpleStyles.newSheet(), layer);
 
@@ -48,6 +55,7 @@ public class MenuScreen extends AbstractScreen {
 
 		grid.add(new Button("Start a New Game").onClick(new UnitSlot() {
 			public void onEmit() {
+				SoundManager.CLICK.play();
 				final AbstractScreen homeScreen = new HomeScreen(stack);
 
 				stack.push(homeScreen);
@@ -61,6 +69,7 @@ public class MenuScreen extends AbstractScreen {
 
 		grid.add(new Button("High Scores").onClick(new UnitSlot() {
 			public void onEmit() {
+				SoundManager.CLICK.play();
 				final AbstractScreen hsScreen = new HighScoresScreen(stack);
 				stack.push(hsScreen);
 				hsScreen.back.clicked().connect(new UnitSlot() {

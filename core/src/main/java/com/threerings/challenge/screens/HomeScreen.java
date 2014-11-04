@@ -16,6 +16,7 @@ import com.threerings.challenge.job.Job;
 import com.threerings.challenge.player.Player;
 import com.threerings.challenge.player.TurnManager;
 import com.threerings.challenge.player.TurnData;
+import com.threerings.challenge.sound.SoundManager;
 import com.threerings.challenge.stats.Skills;
 import com.threerings.challenge.style.TopJobStyle;
 import com.threerings.challenge.util.Formatter;
@@ -88,7 +89,7 @@ public class HomeScreen extends AbstractScreen {
 		jobSearch = new Button("Search today's jobs").onClick(new UnitSlot() {
 			@Override
 			public void onEmit() {
-				PlayN.log().info("Job Button Clicked.");
+				SoundManager.CLICK.play();
 				final AbstractScreen jobScreen = new JobScreen(stack, home,
 						turn.getJobPostings(), player);
 				stack.push(jobScreen);
@@ -103,7 +104,6 @@ public class HomeScreen extends AbstractScreen {
 		Button nextTurn = new Button("Next Turn").onClick(new UnitSlot() {
 			@Override
 			public void onEmit() {
-				PlayN.log().info("Turn Button Clicked.");
 				TurnData td = turn.nextTurn();
 				jobBtnEnable(true);
 				refreshHome(td);
@@ -113,7 +113,6 @@ public class HomeScreen extends AbstractScreen {
 		Group statsGroup = new Group(AxisLayout.horizontal());
 		statsGroup.add(Skills.getSkillHeadersGroup(), playerSkillsBox);
 
-		@SuppressWarnings("deprecation")
 		Group searchGrp = new Group(AxisLayout.vertical().gap(15),
 				TopJobStyle.GREENBG).add(new Label(jobsImage), jobSearch);
 
@@ -128,7 +127,6 @@ public class HomeScreen extends AbstractScreen {
 
 	/* how the heck do you use listeners with this framework! */
 	public void refreshHome(TurnData td) {
-		PlayN.log().info("Refreshing home PlayN.");
 		if (player.getSavings() < 0) {
 			final AbstractScreen loseScreen = new LoseScreen(stack, turn);
 			stack.push(loseScreen);
@@ -139,6 +137,7 @@ public class HomeScreen extends AbstractScreen {
 				}
 			});
 		} else {
+			SoundManager.TURN.play();
 			Job job = player.getCurrentJob();
 			if (job != null) {
 				currentJobBox.destroyContents().set(

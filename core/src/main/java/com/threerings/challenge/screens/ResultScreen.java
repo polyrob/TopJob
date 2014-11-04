@@ -2,6 +2,7 @@ package com.threerings.challenge.screens;
 
 import static playn.core.PlayN.assets;
 import playn.core.Image;
+import playn.core.Sound;
 import react.UnitSlot;
 import tripleplay.game.ScreenStack;
 import tripleplay.ui.Button;
@@ -25,6 +26,8 @@ public class ResultScreen extends AbstractScreen {
 	/* UI */
 	private Label resultLabel;
 	private Image bgImage;
+	
+	private Sound screenSound;
 
 	public ResultScreen(ScreenStack stack, HomeScreen home, Job job,
 			boolean offer) {
@@ -37,9 +40,13 @@ public class ResultScreen extends AbstractScreen {
 			resultLabel = new Label("Congratulations! Welcome to "
 					+ Job.COMPANIES[job.getCompany()] + "!");
 			bgImage = assets().getImage("images/gotjob.png");
+			screenSound = assets().getSound("sound/woo");
+			screenSound.play();
 		} else {
 			resultLabel = new Label("We're seeking other applicants. Get lost!");
 			bgImage = assets().getImage("images/rejected.png");
+			screenSound = assets().getSound("sound/spit");
+			screenSound.play();
 		}
 	}
 
