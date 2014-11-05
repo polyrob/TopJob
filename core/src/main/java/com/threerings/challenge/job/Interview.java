@@ -25,11 +25,11 @@ public class Interview {
 		this.player = player;
 		
 		/* make chanceModifier initial semi random */
-		chanceModifier = 1 + ((float) Rand.get(11) / 100) - (float) 5 / 100;
-		chanceModifier -= (float) job.getCompany() / 50; // better companies are harder
+		chanceModifier = 0.9f + Rand.getf()/5;
+		chanceModifier -= (float) job.getCompany() / 100; // better companies are harder
 		
 		caclulateChance();
-		System.out.println("Chance for " + job.getJobDisplayName() + ": " + currentChance);
+		//System.out.println("Chance for " + job.getJobDisplayName() + ": " + currentChance);
 	}
 	
 	
@@ -59,6 +59,7 @@ public class Interview {
 	}
 	
 	public float getCurrentChance() {
+		System.out.println("Current Chance: " + currentChance +".  Modifier: " + chanceModifier );
 		return currentChance * chanceModifier;
 	}
 

@@ -17,6 +17,10 @@ public class Rand {
 	public static int get(int max) {
 		return r.nextInt(max);
 	}
+	
+	public static float getf() {
+		return r.nextFloat();
+	}
 
 	public static boolean getSuccessForOdds(float chance) {
 		if (r.nextFloat() < chance) {
