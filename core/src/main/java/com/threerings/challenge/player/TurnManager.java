@@ -56,7 +56,7 @@ public class TurnManager {
 			player.incrementJobTime();
 			if (player.getTimeInJob() % MO_JOB_INCR == 0) {
 				int jobClass = job.getJobClass();
-				if (player.getSkills().getSkill(jobClass) < job.getMinSkills()
+				if (player.getSkills().getSkill(jobClass) <= job.getMinSkills()
 						.getSkill(jobClass)) {
 					/* player hasn't yet maxed on the jobClass at this place */
 					player.getSkills()
@@ -68,7 +68,7 @@ public class TurnManager {
 							+ Skills.SKILLS[Job.jobSkillCrossRef[jobClass]]);
 				}
 
-				/* always boost a random skill when staying in job */
+				/* random skill boost when staying in job */
 				if (Rand.getSuccessForOdds(Rand.FIFTY_FIFTY)) {
 					int randSkill = Rand.get(Skills.SKILLS.length);
 					player.getSkills().boostStat(randSkill);
