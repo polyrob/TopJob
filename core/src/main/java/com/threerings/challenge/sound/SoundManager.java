@@ -46,6 +46,7 @@ public class SoundManager {
 		BIG_TIME= assets().getSound("sound/big_time");
 		CLICK = assets().getSound("sound/click");
 		LOSER = assets().getSound("sound/loser");
+		PAPER = assets().getSound("sound/paper");
 		KNOCK = assets().getSound("sound/knock");
 		SPIT = assets().getSound("sound/spit");
 		TURN = assets().getSound("sound/turn");
